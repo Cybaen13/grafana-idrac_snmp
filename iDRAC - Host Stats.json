@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_INFLUXDB_- IDRAC",
-      "label": "influxdb - idrac",
+      "name": "DS_INFLUXDB-IDRAC",
+      "label": "influxdb-idrac",
       "description": "",
       "type": "datasource",
       "pluginId": "influxdb",
@@ -15,13 +15,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.0.0"
+      "version": "11.2.0"
     },
     {
       "type": "panel",
       "id": "grafana-clock-panel",
       "name": "Clock",
-      "version": "2.1.5"
+      "version": "2.1.7"
     },
     {
       "type": "datasource",
@@ -77,7 +77,7 @@
       }
     ]
   },
-  "description": "SNMP Based Dashboard to Monitor Dell Hosts via iDRAC - by ilovepancakes95",
+  "description": "SNMP Based Dashboard to Monitor Dell Hosts via iDRAC from orginal dashboard by ilovepancakes95 \nAdapted to flux by cybaen",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": 12106,
@@ -113,20 +113,9 @@
       "type": "row"
     },
     {
-      "clockType": "24 hour",
-      "countdownSettings": {
-        "endCountdownTime": "2020-04-10T22:05:00.000Z",
-        "endText": "00:00:00"
-      },
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
-      },
-      "dateSettings": {
-        "dateFormat": "YYYY-MM-DD",
-        "fontSize": "20px",
-        "fontWeight": "normal",
-        "showDate": false
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "gridPos": {
         "h": 3,
@@ -135,17 +124,24 @@
         "y": 1
       },
       "id": 213,
-      "mode": "time",
       "options": {
         "bgColor": "",
         "clockType": "24 hour",
         "countdownSettings": {
           "endCountdownTime": "2022-05-16T03:26:04-04:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-05-16T03:26:04-04:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -154,11 +150,18 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "32px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
         "fontMono": false,
         "mode": "time",
         "refresh": "sec",
         "timeSettings": {
-          "fontSize": "12px",
+          "fontSize": "36px",
           "fontWeight": "normal"
         },
         "timezone": "",
@@ -169,69 +172,14 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "2.1.5",
-      "refreshSettings": {
-        "syncWithDashboard": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "timeSettings": {
-        "customFormat": "HH:mm:ss",
-        "fontSize": "32px",
-        "fontWeight": "normal"
-      },
-      "timezoneSettings": {
-        "fontSize": "12px",
-        "fontWeight": "normal",
-        "showTimezone": false,
-        "zoneFormat": "offsetAbbv"
-      },
+      "pluginVersion": "2.1.7",
       "title": "Local Time",
       "type": "grafana-clock-panel"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -361,6 +309,7 @@
               {
                 "id": "custom.cellOptions",
                 "value": {
+                  "mode": "gradient",
                   "type": "color-background"
                 }
               },
@@ -374,15 +323,15 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#C4162A",
+                      "color": "dark-red",
                       "value": null
                     },
                     {
-                      "color": "#FA6400",
+                      "color": "dark-orange",
                       "value": 2
                     },
                     {
-                      "color": "#37872D",
+                      "color": "dark-green",
                       "value": 3
                     }
                   ]
@@ -437,6 +386,7 @@
               {
                 "id": "custom.cellOptions",
                 "value": {
+                  "mode": "gradient",
                   "type": "color-background"
                 }
               },
@@ -450,16 +400,24 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#E0B400",
+                      "color": "dark-purple",
                       "value": null
                     },
                     {
-                      "color": "#C4162A",
-                      "value": 2.9
+                      "color": "dark-yellow",
+                      "value": 2
                     },
                     {
-                      "color": "#37872D",
+                      "color": "dark-green",
                       "value": 3
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 4
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 5
                     }
                   ]
                 }
@@ -590,59 +548,23 @@
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
+          "enablePagination": false,
           "fields": "",
           "reducer": [
             "sum"
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": []
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "repeatDirection": "h",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "system-name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "F",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "idrac-url"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "slimit": "",
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -657,7 +579,7 @@
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"bios-version\" FROM \"idrac-hosts\" WHERE (\"system-name\" =~ /^$idrac_host$/) AND $timeFilter GROUP BY \"system-name\" LIMIT 1",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r._field == \"system-servicetag\" or r._field == \"system-model\" or r._field == \"power-state\" or r._field == \"system-globalstatus\" or r._field == \"system-uptime\" or r._field == \"idrac-url\")\r\n|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n|> unique(column: \"system-name\")\r\n|> keep(columns: [\"system-name\", \"system-servicetag\", \"system-model\", \"power-state\",\"system-globalstatus\",\"system-uptime\",\"idrac-url\"])\r\n|> group()\r\n|> sort(columns: [\"system-name\"], desc: false)",
           "rawQuery": false,
           "refId": "B",
           "resultFormat": "table",
@@ -666,158 +588,6 @@
               {
                 "params": [
                   "system-servicetag"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "slimit": "",
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "system-name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "system-model"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "slimit": "",
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "system-name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "power-state"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "slimit": "",
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "system-name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "D",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "system-globalstatus"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "slimit": "",
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "system-name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "E",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "system-uptime"
                 ],
                 "type": "field"
               }
@@ -840,6 +610,23 @@
           "options": {
             "reducers": []
           }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "idrac-url": 1,
+              "power-state": 4,
+              "system-globalstatus": 5,
+              "system-model": 2,
+              "system-name": 0,
+              "system-servicetag": 3,
+              "system-uptime": 6
+            },
+            "renameByName": {}
+          }
         }
       ],
       "type": "table"
@@ -847,8 +634,9 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -863,17 +651,65 @@
             },
             "lineWidth": 3
           },
-          "mappings": [],
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 0,
+                  "text": "Offline"
+                },
+                "1": {
+                  "index": 1,
+                  "text": "Other"
+                },
+                "2": {
+                  "index": 2,
+                  "text": "Unknown"
+                },
+                "3": {
+                  "index": 3,
+                  "text": "OK"
+                },
+                "4": {
+                  "index": 4,
+                  "text": "Non Critical"
+                },
+                "5": {
+                  "index": 5,
+                  "text": "Critical"
+                },
+                "6": {
+                  "index": 6,
+                  "text": "Non Recoverable"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "purple",
                 "value": null
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "dark-yellow",
+                "value": 2
+              },
+              {
+                "color": "dark-green",
+                "value": 3
+              },
+              {
+                "color": "dark-orange",
+                "value": 4
+              },
+              {
+                "color": "dark-red",
+                "value": 5
               }
             ]
           }
@@ -887,13 +723,13 @@
         "y": 1
       },
       "id": 524,
-      "interval": "",
+      "maxDataPoints": 100,
       "options": {
         "colWidth": 0.29,
         "legend": {
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "rowHeight": 0.79,
         "showValue": "auto",
@@ -908,7 +744,7 @@
           "alias": "[[tag_system-name]]",
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -921,6 +757,7 @@
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"_field\"] == \"system-globalstatus\")\r\n|> group(columns: [\"_field\", \"system-name\"]) // Group by field and system name\r\n|> keep(columns: [\"_time\", \"_value\", \"system-name\"])\r\n|> sort(columns: [\"system-name\", \"_time\"], desc: false)\r\n|> aggregateWindow(every:5m, fn:last)",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -948,7 +785,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -996,6 +833,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1007,12 +845,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -1030,7 +868,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "show tag values cardinality from \"idrac-hosts\" with key = \"system-name\"",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart)\r\n|> keyValues(keyColumns: [\"system-name\"])\r\n|> keep(columns: [\"system-name\"])\r\n|> distinct(column: \"host\")\r\n|> group()\r\n|> count()",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -1084,7 +922,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1097,6 +935,8 @@
               "options": {
                 "match": "null",
                 "result": {
+                  "color": "dark-red",
+                  "index": 0,
                   "text": "N/A"
                 }
               },
@@ -1107,12 +947,12 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "dark-red",
                 "value": null
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "dark-blue",
+                "value": 1
               }
             ]
           },
@@ -1129,10 +969,11 @@
       "id": 6,
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "none",
+        "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1144,17 +985,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"system-uptime\")\r\n",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1182,7 +1024,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1223,11 +1065,11 @@
               },
               {
                 "color": "#37872D",
-                "value": 2.9
+                "value": 3
               },
               {
                 "color": "#C4162A",
-                "value": 3.9
+                "value": 4
               }
             ]
           },
@@ -1248,6 +1090,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1259,18 +1102,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"power-state\" FROM \"esxi-01-idrac\" WHERE $timeFilter",
+          "query": "//SELECT \"power-state\" FROM \"esxi-01-idrac\" WHERE $timeFilter\r\nfrom(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"system-globalstatus\")\r\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1299,13 +1142,15 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
+          "fieldMinMax": false,
           "mappings": [
             {
               "options": {
@@ -1334,11 +1179,11 @@
               },
               {
                 "color": "#FA6400",
-                "value": 2.9
+                "value": 2
               },
               {
                 "color": "#37872D",
-                "value": 3.9
+                "value": 3
               }
             ]
           },
@@ -1359,6 +1204,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1367,21 +1213,21 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
+        "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"power-state\" FROM \"esxi-01-idrac\" WHERE $timeFilter",
+          "query": "//SELECT \"power-state\" FROM \"esxi-01-idrac\" WHERE $timeFilter\r\nfrom(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"power-state\")\r\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1410,7 +1256,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1458,29 +1304,30 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^idrac\\-hosts\\.system\\-servicetag$/",
+          "fields": "/^system-servicetag.+$/",
           "values": false
         },
         "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"system-servicetag\" FROM /^$idrac_host$/ WHERE (\"system-name\" =~ /^$idrac_host$/) AND $timeFilter",
+          "query": "//SELECT \"system-servicetag\" FROM /^$idrac_host$/ WHERE (\"system-name\" =~ /^$idrac_host$/) AND $timeFilter\r\nfrom(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"system-servicetag\")\r\n|> filter(fn: (r) => r._field == \"system-servicetag\")",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1509,7 +1356,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1523,6 +1370,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -1617,7 +1465,7 @@
           "alias": "System Watts",
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -1636,6 +1484,7 @@
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"system-watts\")\r\n|> drop(columns:[\"agent_host\",\"host\", \"system-name\"])",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1662,12 +1511,25 @@
         }
       ],
       "title": "System Watts",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "system-watts": "System Watts"
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1681,6 +1543,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -1718,48 +1581,17 @@
               },
               {
                 "color": "orange",
-                "value": 70
+                "value": 38
               },
               {
                 "color": "red",
-                "value": 84
+                "value": 48
               }
             ]
           },
           "unit": "celsius"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CPU 1 Temp"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "rgb(91, 151, 235)",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CPU 2 Temp"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "rgb(90, 161, 80)",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 7,
@@ -1791,7 +1623,7 @@
           "alias": "CPU 1 Temp",
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -1810,6 +1642,7 @@
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field =~ /^cpu[0-9]-temp$/)\r\n|> drop(columns:[\"agent_host\",\"host\", \"system-name\"])\r\n|> toFloat()\r\n|> map(fn: (r) => ({r with _value: r._value / 10.0}))\r\n",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1839,68 +1672,24 @@
               "value": "/^$idrac_host$/"
             }
           ]
-        },
-        {
-          "alias": "CPU 2 Temp",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "cpu2-temp"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
         }
       ],
       "title": "CPU Temp",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/^cpu([0-9]+)-temp/",
+            "renamePattern": "CPU $1 Temperature"
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1966,6 +1755,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1977,18 +1767,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"power-state\" FROM \"esxi-01-idrac\" WHERE $timeFilter",
+          "query": "//SELECT \"power-state\" FROM \"esxi-01-idrac\" WHERE $timeFilter\r\nfrom(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"power-state\")\r\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2017,7 +1807,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2074,6 +1864,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2085,17 +1876,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"cmos-batterystate\")\r\n",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -2123,7 +1915,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2192,6 +1984,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2203,17 +1996,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"raid-batterystate\")\r\n",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -2236,12 +2030,18 @@
         }
       ],
       "title": "RAID Battery",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {}
+        }
+      ],
       "type": "stat"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2289,28 +2089,30 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^bios\\-version$/",
+          "fields": "/^bios-version.+$/",
           "values": false
         },
         "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"bios-version\")\r\n",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -2338,7 +2140,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2404,6 +2206,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2415,18 +2218,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"power-state\" FROM \"esxi-01-idrac\" WHERE $timeFilter",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"storage-status\")\r\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2455,7 +2258,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2521,6 +2324,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2532,18 +2336,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"power-state\" FROM \"esxi-01-idrac\" WHERE $timeFilter",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"memory-status\")\r\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2572,7 +2376,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2638,6 +2442,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2649,18 +2454,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"power-state\" FROM \"esxi-01-idrac\" WHERE $timeFilter",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"temp-status\")\r\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2689,7 +2494,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2749,6 +2554,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2760,17 +2566,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"intrusion-sensor\")\r\n",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -2798,7 +2605,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2911,18 +2718,19 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [],
           "limit": "1",
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"system-osname\" or r._field == \"system-osversion\")\r\n|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n|> unique(column: \"system-osname\")\r\n|> keep(columns: [\"system-osname\", \"system-osversion\"])\r\n|> group()\r\n|> sort(columns: [\"system-osname\"], desc: false)",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -2942,76 +2750,15 @@
               "value": "/^$idrac_host$/"
             }
           ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "system-osversion"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
         }
       ],
       "title": "OS Information",
-      "transformations": [
-        {
-          "id": "seriesToRows",
-          "options": {
-            "reducers": []
-          }
-        },
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "Time": {
-                "aggregations": [],
-                "operation": "groupby"
-              },
-              "system-osname": {
-                "aggregations": [],
-                "operation": "groupby"
-              },
-              "system-osversion": {
-                "aggregations": [],
-                "operation": "groupby"
-              }
-            }
-          }
-        }
-      ],
       "type": "table"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3206,7 +2953,7 @@
         ]
       },
       "gridPos": {
-        "h": 20,
+        "h": 19,
         "w": 9,
         "x": 7,
         "y": 14
@@ -3216,6 +2963,7 @@
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
+          "enablePagination": true,
           "fields": "",
           "reducer": [
             "sum"
@@ -3224,12 +2972,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -3243,7 +2991,7 @@
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"log-dates\" FROM \"idrac-hosts\" WHERE (\"system-name\" =~ /^$idrac_host$/) AND $timeFilter GROUP BY \"log-number\" LIMIT 1",
+          "query": "//SELECT \"log-dates\" FROM \"idrac-hosts\" WHERE (\"system-name\" =~ /^$idrac_host$/) AND $timeFilter GROUP BY \"log-number\" LIMIT 1\r\nfrom(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r[\"_field\"] == \"log-dates\" or r[\"_field\"] == \"log-entry\" or r[\"_field\"] == \"log-severity\")\r\n|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n|> unique(column: \"log-dates\")\r\n|> keep(columns: [ \"log-dates\",\"log-entry\",\"log-severity\"])\r\n|> group()\r\n|> sort(columns: [\"log-dates\"], desc: true)\r\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "table",
@@ -3264,97 +3012,15 @@
               "value": "/^$idrac_host$/"
             }
           ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "log-number"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "log-entry"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "log-number"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "log-severity"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
         }
       ],
       "title": "System Log Entries",
-      "transformations": [
-        {
-          "id": "merge",
-          "options": {
-            "reducers": []
-          }
-        }
-      ],
       "type": "table"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3368,6 +3034,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -3419,7 +3086,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Exhaust Temp"
+              "options": "exhaust-temp"
             },
             "properties": [
               {
@@ -3428,13 +3095,17 @@
                   "fixedColor": "rgb(90, 161, 80)",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Exhaust Temperature"
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "Inlet Temp"
+              "options": "inlet-temp"
             },
             "properties": [
               {
@@ -3443,6 +3114,10 @@
                   "fixedColor": "rgb(91, 151, 235)",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Inlet Temperature"
               }
             ]
           }
@@ -3478,7 +3153,7 @@
           "alias": "Inlet Temp",
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -3497,6 +3172,7 @@
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"inlet-temp\" or r._field == \"exhaust-temp\")\r\n|> drop(columns:[\"agent_host\",\"host\", \"system-name\"])\r\n|> toFloat()\r\n|> map(fn: (r) => ({r with _value: r._value / 10.0}))",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -3504,59 +3180,6 @@
               {
                 "params": [
                   "inlet-temp"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "alias": "Exhaust Temp",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "exhaust-temp"
                 ],
                 "type": "field"
               },
@@ -3587,7 +3210,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3748,7 +3371,7 @@
                       "8": {
                         "color": "dark-purple",
                         "index": 7,
-                        "text": "Non-Raid"
+                        "text": "Non-RAID"
                       },
                       "9": {
                         "color": "dark-red",
@@ -3887,12 +3510,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -3906,43 +3529,7 @@
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "C",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "disks-capacity"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "disks-name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field == \"disks-capacity\" or r._field == \"disks-state\" or r._field == \"disks-predictivefail\")\r\n|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n|> unique(column: \"disks-name\")\r\n|> keep(columns: [\"disks-name\", \"disks-capacity\", \"disks-state\",\"disks-predictivefail\"])\r\n|> group()\r\n|> sort(columns: [\"disks-name\"], desc: false)",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -3962,51 +3549,22 @@
               "value": "/^$idrac_host$/"
             }
           ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "disks-name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "disks-predictivefail"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
         }
       ],
       "title": "Physical Disk Status",
       "transformations": [
         {
-          "id": "merge",
+          "id": "organize",
           "options": {
-            "reducers": []
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "disks-capacity": 1,
+              "disks-name": 0,
+              "disks-predictivefail": 3,
+              "disks-state": 2
+            },
+            "renameByName": {}
           }
         }
       ],
@@ -4015,7 +3573,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4029,6 +3587,7 @@
             "axisLabel": "RPM",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -4061,7 +3620,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "orange",
@@ -4103,7 +3663,7 @@
           "alias": "Fan 1",
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -4122,6 +3682,7 @@
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"_measurement\"] == \"${hostslist_key}\")\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r._field =~ /^fan[0-9]-speed$/)\r\n|> drop(columns:[\"agent_host\",\"host\", \"system-name\"])\r\n",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -4145,250 +3706,24 @@
               "value": "/^$idrac_host$/"
             }
           ]
-        },
-        {
-          "alias": "Fan 2",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fan2-speed"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "alias": "Fan 3",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fan3-speed"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "alias": "Fan 4",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fan4-speed"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "alias": "Fan 5",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "E",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fan5-speed"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "alias": "Fan 6",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "F",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fan6-speed"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
         }
       ],
       "title": "Fan Speed",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/^fan([0-1]+)-speed$/",
+            "renamePattern": "Fan $1 Speed "
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_INFLUXDB_- IDRAC}"
+        "uid": "${DS_INFLUXDB-IDRAC}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4404,7 +3739,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4508,7 +3844,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#37872D"
+                      "color": "#37872D",
+                      "value": null
                     },
                     {
                       "color": "rgba(224, 180, 0, 0)",
@@ -4591,7 +3928,7 @@
         ]
       },
       "gridPos": {
-        "h": 7,
+        "h": 6,
         "w": 8,
         "x": 16,
         "y": 27
@@ -4601,6 +3938,7 @@
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
+          "enablePagination": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -4609,12 +3947,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
+            "uid": "${DS_INFLUXDB-IDRAC}"
           },
           "groupBy": [
             {
@@ -4628,6 +3966,7 @@
           "measurement": "idrac-hosts",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart, stop: now())\r\n|> filter(fn: (r) => r[\"system-name\"] == \"${idrac_host}\")\r\n|> filter(fn: (r) => r[\"_field\"] == \"nic-current_mac\" or r[\"_field\"] == \"nic-status\" or r[\"_field\"] == \"nic-vendor\")\r\n|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n|> unique(column: \"nic-name\")\r\n|> keep(columns: [\"nic-name\", \"nic-current_mac\", \"nic-status\",\"nic-vendor\"])\r\n|> group()\r\n|> sort(columns: [\"nic-name\"], desc: false)",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -4647,95 +3986,29 @@
               "value": "/^$idrac_host$/"
             }
           ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "nic-name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "nic-status"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_INFLUXDB_- IDRAC}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "nic-name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "limit": "1",
-          "measurement": "idrac-hosts",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "nic-current_mac"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "system-name",
-              "operator": "=~",
-              "value": "/^$idrac_host$/"
-            }
-          ]
         }
       ],
       "title": "Network Interfaces",
       "transformations": [
         {
-          "id": "merge",
+          "id": "organize",
           "options": {
-            "reducers": []
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "nic-current_mac": 3,
+              "nic-name": 0,
+              "nic-status": 2,
+              "nic-vendor": 1
+            },
+            "renameByName": {}
           }
         }
       ],
       "type": "table"
     }
   ],
-  "refresh": "10s",
+  "refresh": "",
   "schemaVersion": 39,
   "tags": [
     "idrac",
@@ -4748,16 +4021,75 @@
         "current": {},
         "datasource": {
           "type": "influxdb",
-          "uid": "${DS_INFLUXDB_- IDRAC}"
+          "uid": "${DS_INFLUXDB-IDRAC}"
         },
-        "definition": "SHOW TAG VALUES FROM \"idrac-hosts\" WITH KEY=\"system-name\"",
+        "definition": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart)\r\n|> keyValues(keyColumns: [\"system-name\"])\r\n|> keep(columns: [\"system-name\"])\r\n|> distinct(column: \"host\")\r\n|> group()\r\n",
         "hide": 0,
         "includeAll": true,
         "label": "iDRAC Host",
         "multi": true,
         "name": "idrac_host",
         "options": [],
-        "query": "SHOW TAG VALUES FROM \"idrac-hosts\" WITH KEY=\"system-name\"",
+        "query": {
+          "0": "S",
+          "1": "H",
+          "2": "O",
+          "3": "W",
+          "4": " ",
+          "5": "T",
+          "6": "A",
+          "7": "G",
+          "8": " ",
+          "9": "V",
+          "10": "A",
+          "11": "L",
+          "12": "U",
+          "13": "E",
+          "14": "S",
+          "15": " ",
+          "16": "F",
+          "17": "R",
+          "18": "O",
+          "19": "M",
+          "20": " ",
+          "21": "\"",
+          "22": "i",
+          "23": "d",
+          "24": "r",
+          "25": "a",
+          "26": "c",
+          "27": "-",
+          "28": "h",
+          "29": "o",
+          "30": "s",
+          "31": "t",
+          "32": "s",
+          "33": "\"",
+          "34": " ",
+          "35": "W",
+          "36": "I",
+          "37": "T",
+          "38": "H",
+          "39": " ",
+          "40": "K",
+          "41": "E",
+          "42": "Y",
+          "43": "=",
+          "44": "\"",
+          "45": "s",
+          "46": "y",
+          "47": "s",
+          "48": "t",
+          "49": "e",
+          "50": "m",
+          "51": "-",
+          "52": "n",
+          "53": "a",
+          "54": "m",
+          "55": "e",
+          "56": "\"",
+          "query": "from(bucket: \"${bucket}\")\r\n|> range(start: v.timeRangeStart)\r\n|> keyValues(keyColumns: [\"system-name\"])\r\n|> keep(columns: [\"system-name\"])\r\n|> distinct(column: \"host\")\r\n|> group()\r\n"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -4766,6 +4098,53 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "idrac",
+          "value": "idrac"
+        },
+        "description": "The bucket collecting idrac data",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Bucket",
+        "multi": false,
+        "name": "bucket",
+        "options": [
+          {
+            "selected": true,
+            "text": "idrac",
+            "value": "idrac"
+          }
+        ],
+        "query": "idrac",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "idrac-hosts",
+          "value": "idrac-hosts"
+        },
+        "description": "key tag of the hosts list. By default the value is \"idrac-hosts\" as per telegraf default configuration",
+        "hide": 2,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "hostslist_key",
+        "options": [
+          {
+            "selected": true,
+            "text": "idrac-hosts",
+            "value": "idrac-hosts"
+          }
+        ],
+        "query": "idrac-hosts",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
@@ -4773,7 +4152,6 @@
     "from": "now-3h",
     "to": "now"
   },
-  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {
     "hidden": false,
     "refresh_intervals": [
@@ -4791,7 +4169,7 @@
   },
   "timezone": "",
   "title": "iDRAC - Host Stats",
-  "uid": "O19gr0jZk",
-  "version": 1,
+  "uid": "P24pq0j321",
+  "version": 58,
   "weekStart": ""
 }
