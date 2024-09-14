@@ -1,4 +1,4 @@
-# Ultimate iDRAC Grafana Dashboard (Telegraf SNMP Based)
+# Ultimate iDRAC Grafana Dashboard (Telegraf SNMP + Flux language Based)
 :computer: :bar_chart: :clipboard:
 SNMP Based Dashboard to Monitor Dell Hosts via iDRAC 
 Adapted to work with FLUX language for InfluxDB V2 from the work of [ilovepancakes95](https://github.com/ilovepancakes95)
