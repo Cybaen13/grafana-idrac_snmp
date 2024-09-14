@@ -2,6 +2,7 @@
 :computer: :bar_chart: :clipboard:
 SNMP Based Dashboard to Monitor Dell Hosts via iDRAC 
 Adapted to work with FLUX language for InfluxDB V2 from the work of [ilovepancakes95](https://github.com/ilovepancakes95)
+
 Grafana Dashboard ID: [21915](https://grafana.com/grafana/dashboards/21915)    
 ![Screenshot 1](https://grafana.com/api/dashboards/12106/images/7943/image)
 # iDRAC - Host Stats (Flux)
