@@ -3713,7 +3713,7 @@
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "/^fan([0-1]+)-speed$/",
+            "regex": "/^fan([0-9]+)-speed$/",
             "renamePattern": "Fan $1 Speed "
           }
         }
